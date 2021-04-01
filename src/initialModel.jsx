@@ -22,11 +22,13 @@ class initialModel extends React.Component {
   };
 
   ImageUploadhandler = () => {
+    console.log("Hello")
     this.setState({
       ImageUploaded: true,
       spinner: true,
     });
     var image = this.state.file;
+    console.log(this.state.file)
     let data = new FormData();
     data.append("image", image);
     fetch("http://127.0.0.1:5000/dehaze", {

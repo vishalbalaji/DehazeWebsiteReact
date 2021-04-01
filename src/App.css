@@ -44,6 +44,10 @@
   width: 450px;
 }
 
+.process-stack {
+  display: flex;
+}
+
 @media screen and (max-width: 800px) {
   .OutputSection {
     flex-direction: column;
