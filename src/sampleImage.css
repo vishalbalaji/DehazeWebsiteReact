@@ -1,0 +1,36 @@
+.bg {
+  margin: 3rem 2rem;
+  padding: 3rem 2rem;
+  background-color: rgb(220, 223, 228);
+  border-radius: 10px;
+}
+
+.imageCard {
+  margin: 20px;
+}
+
+.image {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sampleImageText {
+  font-size: 1.2rem;
+}
+
+.close {
+  cursor: pointer;
+  position: relative;
+  top: -70px;
+  left: -50px;
+  background-color: white;
+  /* border-radius: 50px; */
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  font-weight: bolder;
+  font-size: 20px;
+}

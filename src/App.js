@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import "./index.css";
+import FinalModel from "./FinalModel";
+import { HashRouter as Router, Link, Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import initialModel from "./initialModel";
+
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Route exact={true} path="/" component={FinalModel} />
+          <Route path="/oldModel" component={initialModel}></Route>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

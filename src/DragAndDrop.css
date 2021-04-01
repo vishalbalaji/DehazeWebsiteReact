@@ -1,0 +1,60 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css";
+
+.container {
+  /* transform: translateY(-100%); */
+
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: hidden;
+}
+
+.uploadedImage {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 50px;
+  height: 50px;
+}
+
+.drop-container {
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+.drop-message {
+  text-align: center;
+  color: black;
+}
+
+.add-border {
+  border: 2px solid green;
+}
+
+.sampleImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 30px;
+}
+
+.image-bg {
+  background-color: #e7f3f8;
+  border-radius: 10px;
+  cursor: pointer;
+  transform: rotateZ(8.1deg);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (max-width: 700px) {
+  .image-bg {
+    display: none;
+  }
+}
