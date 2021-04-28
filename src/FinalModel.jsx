@@ -13,10 +13,12 @@ import { Dropdown } from "react-bootstrap";
 
 class FinalModel extends React.Component {
   state = {
-    ImageUploaded: false,
     SampleImageViewer: false,
     SampleImageTaken: 0,
     file: null,
+    in_img: null,
+    out_img: null,
+    processed: false,
     intensity: 5,
   };
 
@@ -24,14 +26,29 @@ class FinalModel extends React.Component {
     // console.log(file);
     this.setState({
       file: file,
+      in_img: URL.createObjectURL(file),
     });
     // this.state.file = file;
   };
 
-  ImageUploadhandler = () => {
+  dehazeImage = async () => {
     this.setState({
-      ImageUploaded: true,
+      processed: false,
     });
+    let data = new FormData();
+    console.log(this.state.intensity);
+    data.append("image", this.state.file);
+    data.append("intensity", this.state.intensity);
+    const response = await fetch("https://dehaze-api.herokuapp.com/dehaze", {
+      method: "POST",
+      body: data,
+    });
+    const json = await response.json();
+    this.setState({
+      out_img: json.out_img,
+      processed: true,
+    });
+    console.log(this.state.out_img);
   };
 
   setIntensity = (e) => {
@@ -74,7 +91,7 @@ class FinalModel extends React.Component {
                     <button
                       class="button is-info btn"
                       // style={{ marginRight: "60px" }}
-                      onClick={this.ImageUploadhandler}
+                      onClick={this.dehazeImage}
                     >
                       Process
                     </button>
@@ -84,33 +101,31 @@ class FinalModel extends React.Component {
                         min="1"
                         max="10"
                         placeholder="(5) Int"
+                        value={this.state.intensity}
                         onChange={(e) => {
                           if (e.target.value > 10) e.target.value = 10;
                           if (e.target.value < 1) e.target.value = 1;
                           this.setState({
                             intensity: e.target.value,
-                            ImageUploaded: false,
+                            //ImageUploaded: false,
                           });
                         }}
                       />
                     </div>
                   </div>
                 ) : (
-                  <button
-                    class="button is-info btn"
-                    // onClick={this.ImageUploadhandler}
-                    disabled
-                  >
+                  <button class="button is-info btn" disabled>
                     Process
                   </button>
                 )}
               </div>
             </div>
           </div>
-          {this.state.ImageUploaded ? (
+          {this.state.processed ? (
             <OutputSection
-              file={this.state.file}
-              intensity={this.state.intensity}
+              in_img={this.state.in_img}
+              out_img={this.state.out_img}
+              status="Success"
             ></OutputSection>
           ) : (
             <div>
@@ -120,11 +135,31 @@ class FinalModel extends React.Component {
                   SampleImageHandler={this.SampleImageHandler}
                 ></SampleImage>
               ) : (
-                <DragAndDrop
-                  SampleImageHandler={this.SampleImageHandler}
-                  SampleImageTaken={this.state.SampleImageTaken}
-                  SetFile={this.SetFile}
-                ></DragAndDrop>
+                <div>
+                  {!this.state.file ? (
+                    <DragAndDrop
+                      SampleImageHandler={this.SampleImageHandler}
+                      SampleImageTaken={this.state.SampleImageTaken}
+                      SetFile={this.SetFile}
+                    ></DragAndDrop>
+                  ) : (
+                    <div>
+                      {!this.state.out_img ? (
+                        <OutputSection
+                          in_img={this.state.in_img}
+                          out_img={this.state.in_img}
+                          status="Click 'Process'"
+                        ></OutputSection>
+                      ) : (
+                        <OutputSection
+                          in_img={this.state.in_img}
+                          out_img={this.state.out_img}
+                          status="Processing..."
+                        ></OutputSection>
+                      )}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           )}

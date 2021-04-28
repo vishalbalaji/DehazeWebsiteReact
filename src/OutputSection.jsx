@@ -4,36 +4,22 @@ import "./App.css";
 import "./index.css";
 class OutputSection extends React.Component {
   state = {
-    spinner: false,
-    response: false,
+    status: null
   };
 
   componentDidMount() {
-    console.log(this.props.intensity);
-    // console.log("File: ", this.props.file);
-    this.runModel(this.props.intensity);
+    console.log(this.props)
+
+    let imgOP = document.getElementById("output");
+    let imgIP = document.getElementById("input");
+
+    imgIP.src = this.props.in_img;
+    imgOP.src = this.props.out_img;
+
+    this.setState({
+      status: this.props.status
+    });
   }
-
-  runModel = (intensity) => {
-    this.setState({ spinner: true });
-    let data = new FormData();
-    data.append("image", this.props.file);
-    data.append("intensity", intensity);
-    fetch("https://dehaze-api.herokuapp.com/dehaze", {
-      method: "POST",
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        this.setState({ spinner: false, response: true });
-        let imgOP = document.getElementById("output");
-        let imgIP = document.getElementById("input");
-
-        imgOP.src = data.out_img;
-        imgIP.src = URL.createObjectURL(this.props.file);
-      });
-  };
 
   render() {
     return (
@@ -42,22 +28,7 @@ class OutputSection extends React.Component {
           {/* Intensity Slider */}
           <div>
             <div style={styles.status}>
-              Status:
-              <span
-                style={
-                  this.state.spinner
-                    ? { ...styles.processing }
-                    : this.state.response
-                    ? { ...styles.success }
-                    : { ...styles.failure }
-                }
-              >
-                {this.state.spinner
-                  ? "Processing"
-                  : this.state.response
-                  ? " Success"
-                  : " Failure"}
-              </span>
+              Status: {this.state.status}
             </div>
           </div>
         </div>
