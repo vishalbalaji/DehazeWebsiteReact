@@ -1,24 +1,25 @@
 import React from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
+// import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import "./index.css";
 class OutputSection extends React.Component {
   state = {
-    status: null
+    status: null,
   };
 
   componentDidMount() {
-    console.log(this.props)
+    console.log(this.props);
+    if (!this.props.spinner) {
+      let imgOP = document.getElementById("output");
+      let imgIP = document.getElementById("input");
 
-    let imgOP = document.getElementById("output");
-    let imgIP = document.getElementById("input");
+      imgIP.src = this.props.in_img;
+      imgOP.src = this.props.out_img;
 
-    imgIP.src = this.props.in_img;
-    imgOP.src = this.props.out_img;
-
-    this.setState({
-      status: this.props.status
-    });
+      this.setState({
+        status: this.props.status,
+      });
+    }
   }
 
   render() {
@@ -27,12 +28,10 @@ class OutputSection extends React.Component {
         <div>
           {/* Intensity Slider */}
           <div>
-            <div style={styles.status}>
-              Status: {this.state.status}
-            </div>
+            <div style={styles.status}>Status: {this.state.status}</div>
           </div>
         </div>
-        {this.state.spinner ? (
+        {this.props.spinner ? (
           <div>
             <div class="d-flex justify-content-center">
               <div

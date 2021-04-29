@@ -4,9 +4,10 @@ import DragAndDrop from "./DragAndDrop";
 import SampleImage from "./SampleImage";
 import OutputSection from "./OutputSection";
 import close from "./images/close.svg";
+import "./bootstrap.css";
 // import "../node_modules/bootstrap/js/dist/popper.js";
 // import "../node_modules/jquery/dist/jquery.js";
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import "./bootstrap.css";
 import { Dropdown } from "react-bootstrap";
 
 // import "../node_modules/bootstrap/dist/js/bootstrap.js";
@@ -20,6 +21,7 @@ class FinalModel extends React.Component {
     out_img: null,
     processed: false,
     intensity: 5,
+    spinner: false,
   };
 
   SetFile = (file) => {
@@ -34,6 +36,7 @@ class FinalModel extends React.Component {
   dehazeImage = async () => {
     this.setState({
       processed: false,
+      spinner: true,
     });
     let data = new FormData();
     console.log(this.state.intensity);
@@ -47,6 +50,7 @@ class FinalModel extends React.Component {
     this.setState({
       out_img: json.out_img,
       processed: true,
+      spinner: false,
     });
     console.log(this.state.out_img);
   };
@@ -121,42 +125,40 @@ class FinalModel extends React.Component {
               </div>
             </div>
           </div>
-          {this.state.processed ? (
-            <OutputSection
-              in_img={this.state.in_img}
-              out_img={this.state.out_img}
-              status="Success"
-            ></OutputSection>
+          {this.state.spinner ? (
+            <div>
+              <div class="d-flex justify-content-center">
+                <div
+                  class="spinner-border"
+                  style={{ width: "3rem", height: "3rem" }}
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
           ) : (
             <div>
-              {this.state.SampleImageViewer ? (
-                <SampleImage
-                  SampleImagePicked={this.SampleImagePicked}
-                  SampleImageHandler={this.SampleImageHandler}
-                ></SampleImage>
+              {this.state.processed ? (
+                <OutputSection
+                  in_img={this.state.in_img}
+                  out_img={this.state.out_img}
+                  status="Success"
+                ></OutputSection>
               ) : (
                 <div>
-                  {!this.state.file ? (
-                    <DragAndDrop
+                  {this.state.SampleImageViewer ? (
+                    <SampleImage
+                      SampleImagePicked={this.SampleImagePicked}
                       SampleImageHandler={this.SampleImageHandler}
-                      SampleImageTaken={this.state.SampleImageTaken}
-                      SetFile={this.SetFile}
-                    ></DragAndDrop>
+                    ></SampleImage>
                   ) : (
                     <div>
-                      {!this.state.out_img ? (
-                        <OutputSection
-                          in_img={this.state.in_img}
-                          out_img={this.state.in_img}
-                          status="Click 'Process'"
-                        ></OutputSection>
-                      ) : (
-                        <OutputSection
-                          in_img={this.state.in_img}
-                          out_img={this.state.out_img}
-                          status="Processing..."
-                        ></OutputSection>
-                      )}
+                      <DragAndDrop
+                        SampleImageHandler={this.SampleImageHandler}
+                        SampleImageTaken={this.state.SampleImageTaken}
+                        SetFile={this.SetFile}
+                      ></DragAndDrop>
                     </div>
                   )}
                 </div>

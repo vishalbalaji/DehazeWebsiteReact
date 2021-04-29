@@ -5,7 +5,7 @@ import image1 from "./images/image1.png";
 import image2 from "./images/image2.jpg";
 import image3 from "./images/image3.jpg";
 import close from "./images/close.svg";
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
+// import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 let imageArr = [image1, image2, image3];
 

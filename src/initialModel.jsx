@@ -1,5 +1,5 @@
 import React from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
+// import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 class initialModel extends React.Component {
   state = {
@@ -22,13 +22,13 @@ class initialModel extends React.Component {
   };
 
   ImageUploadhandler = () => {
-    console.log("Hello")
+    console.log("Hello");
     this.setState({
       ImageUploaded: true,
       spinner: true,
     });
     var image = this.state.file;
-    console.log(this.state.file)
+    console.log(this.state.file);
     let data = new FormData();
     data.append("image", image);
     fetch("http://127.0.0.1:5000/dehaze", {
