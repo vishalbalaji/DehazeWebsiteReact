@@ -5,9 +5,9 @@ import SampleImage from "./SampleImage";
 import OutputSection from "./OutputSection";
 import close from "./images/close.svg";
 import "./bootstrap.css";
+import "./index.css";
 // import "../node_modules/bootstrap/js/dist/popper.js";
 // import "../node_modules/jquery/dist/jquery.js";
-import "./bootstrap.css";
 import { Dropdown } from "react-bootstrap";
 
 // import "../node_modules/bootstrap/dist/js/bootstrap.js";
@@ -67,6 +67,7 @@ class FinalModel extends React.Component {
 
   SampleImagePicked = (id) => {
     console.log(id);
+		if (id === 0) return;
     this.setState({ SampleImageTaken: id });
   };
   //   <Route path="/initial" component={initialModel} />
@@ -78,14 +79,6 @@ class FinalModel extends React.Component {
             <div style={styles.flex} onClick={() => window.location.reload()}>
               <div style={styles.logoTitle}>UNET DEHAZING</div>
               <div style={styles.logoSubtitle}>Group 1 Major Project</div>
-              <Link
-                style={styles.link}
-                to={`/oldModel`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Go to old Version
-              </Link>
             </div>
 
             <div>

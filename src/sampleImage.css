@@ -7,6 +7,12 @@
 
 .imageCard {
   margin: 20px;
+	cursor: pointer;
+	transition: transform 0.2s ease-in-out;
+}
+
+.imageCard:hover {
+	transform: scale(102%)
 }
 
 .image {

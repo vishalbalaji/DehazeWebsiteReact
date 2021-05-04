@@ -194,7 +194,7 @@ class DragAndDrop extends Component {
 							textDecoration: "underline",
 						}}
 					>
-						*Take Images From Dataset*
+						Select Demo Image
           </p>
 				</div>
 			</div>

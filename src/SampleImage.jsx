@@ -11,7 +11,10 @@ class SampleImage extends React.Component {
         <div className="bg">
           <div
             className="close"
-            onClick={() => this.props.SampleImageHandler()}
+						onClick={() => {
+							this.props.SampleImagePicked(0);
+							this.props.SampleImageHandler();
+						}}
           >
             X
           </div>
@@ -24,7 +27,6 @@ class SampleImage extends React.Component {
               }}
             >
               <img src={image1} className="image" />
-              <p className="sampleImageText">Office room</p>
             </div>
             <div
               className=" column imageCard"
