@@ -123,8 +123,12 @@ class DragAndDrop extends Component {
 										width={this.state.file ? "500vw" : null}
 									></img>
 									<div
-										onClick={() => this.setState({ file: null })}
+										onClick={() => {
+											this.props.SampleImagePicked(0);
+											this.setState({ file: null });
+										}}
 										style={{
+											cursor: "pointer",
 											position: "absolute",
 											top: "-20px",
 											left: "-20px",

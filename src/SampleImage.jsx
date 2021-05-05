@@ -12,7 +12,7 @@ class SampleImage extends React.Component {
           <div
             className="close"
 						onClick={() => {
-							this.props.SampleImagePicked(0);
+							this.props.SampleImagePicked(-1);
 							this.props.SampleImageHandler();
 						}}
           >

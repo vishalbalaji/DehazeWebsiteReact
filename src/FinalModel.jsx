@@ -67,7 +67,7 @@ class FinalModel extends React.Component {
 
   SampleImagePicked = (id) => {
     console.log(id);
-		if (id === 0) return;
+		if (id === -1) return;
     this.setState({ SampleImageTaken: id });
   };
   //   <Route path="/initial" component={initialModel} />
@@ -150,6 +150,7 @@ class FinalModel extends React.Component {
                       <DragAndDrop
                         SampleImageHandler={this.SampleImageHandler}
                         SampleImageTaken={this.state.SampleImageTaken}
+												SampleImagePicked={this.SampleImagePicked}
                         SetFile={this.SetFile}
                       ></DragAndDrop>
                     </div>
